@@ -50,42 +50,63 @@
                           die("Connection failed: " . mysqli_connect_error());
                         }
                         
-                        $sql = "SELECT `userID`,`userName`,`password` FROM `userdb` WHERE `email` = ". $_POST['email'];
+                        $sql = "SELECT `userID`,`userName`,`password` FROM `userdb` WHERE `email` = '". $_POST['email']."'";
                         $result = mysqli_query($conn, $sql);
-                        
+
+                        $password;
+                        $username = "";
+                        $userID;
+
+
+
                         if (mysqli_num_rows($result) > 0) {
-                            
-                                $password = $_SESSION["password"];
-                                $username = $_SESSION["userName"];
-                                $userID = $_SESSION["userID"];
-                            
+                            // output data of each row
+                            while($row = mysqli_fetch_assoc($result)) {
+                              
+                                $password = $row["password"];
+                                $username = $row["userName"];
+                                $userID = $row["userID"];
+                            }
+
                             if($password==$_POST['password']){
                                 header('Location:home.php');
                                 $system_userName = $username;
                                 $system_userID = $userID;
-                                echo "<script>alert('MMC..!')</script>";
+                                session_start();
+                                $_SESSION['regName'] = $username;
+                                echo "<a href='home.php'><a>";
                             }
                             else{
                                 echo "<script>alert('Wrong password..!')</script>";
                             }
-                        } else {
-                        echo "<script>alert('Wrong email adress..!')</script>";
+
+                        } 
+                        
+                        else {
+                           echo "<script>alert('Wrong email adress..!')</script>";
                         }
+
+
                 }
             }
         ?>
 
-        <br><br><br><br><br><br><br><br><br><br>
+        <br><br><br><br><br><br><br><br><br><br><br><br>
 
         <div class="container">
             <div id="form-group">
 
               <form action="login.php" method="post">
-                <input type="text" id="email" name="email">
-                <input type="password" id="password" name="password"> <br><br>
+                <div class="form-group">
+                <input type="text" id="email" name="email" placeholder = "email" required>
+                </div>
+                <div class="form-group">
+                <input type="password" id="password" name="password" placeholder = "password" required> <br><br>
+                </div>
+                <div class="form-group">
                 <button type="Submit" class="btn btn-primary" name="log_in">Log in</button>
+                </div>
               </form>
-
             </div>
           </div>
 

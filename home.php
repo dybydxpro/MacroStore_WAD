@@ -13,7 +13,8 @@
 
     <body onload="currentSlide(1)">
     <?php 
-            $system_userName;
+            session_start();
+            $system_userName= $_SESSION['regName'];
             $system_userID;        
         ?> 
  
@@ -35,7 +36,7 @@
                         <li><a href="about.php"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                    <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> User Name</a></li>
+                    <li><a href="logout.php"><span class="glyphicon glyphicon-user"></span> <?php if($system_userName==""){ echo "User Name";} else {echo $system_userName;} ?></a></li>
                         <li><a href="signup.php"><span class="glyphicon glyphicon-plus-sign"></span> Sign up</a></li>
                         <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>
