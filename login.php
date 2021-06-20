@@ -37,18 +37,62 @@
             </div>
         </nav>
 
+        <?php
+            if(isset($_POST['log_in'])) {
+                if(!empty($_POST['email']) && !empty($_POST['password'])){
+                        $servername = "localhost:3306";
+                        $username = "root";
+                        $password = "";
+                        $dbname = "wadproject";
+                  
+                        $conn = mysqli_connect($servername, $username, $password, $dbname);
+                        if (!$conn) {
+                          die("Connection failed: " . mysqli_connect_error());
+                        }
+                        
+                        $sql = "SELECT `userID`,`userName`,`password` FROM `userdb` WHERE `email` = ". $_POST['email'];
+                        $result = mysqli_query($conn, $sql);
+                        
+                        if (mysqli_num_rows($result) > 0) {
+                            
+                                $password = $_SESSION["password"];
+                                $username = $_SESSION["userName"];
+                                $userID = $_SESSION["userID"];
+                            
+                            if($password==$_POST['password']){
+                                header('Location:home.php');
+                                $system_userName = $username;
+                                $system_userID = $userID;
+                                echo "<script>alert('MMC..!')</script>";
+                            }
+                            else{
+                                echo "<script>alert('Wrong password..!')</script>";
+                            }
+                        } else {
+                        echo "<script>alert('Wrong email adress..!')</script>";
+                        }
+                }
+            }
+        ?>
 
-        <div class="wrapper fadeInDown">
-            <div id="formContent">
+        <br><br><br><br><br><br><br><br><br><br>
 
-              <form>
-                <input type="text" id="login" class="fadeIn second" name="login" placeholder="email">
-                <input type="text" id="password" class="fadeIn third" name="login" placeholder="password">
-                <input type="submit" class="fadeIn fourth" value="Log In">
+        <div class="container">
+            <div id="form-group">
+
+              <form action="login.php" method="post">
+                <input type="text" id="email" name="email">
+                <input type="password" id="password" name="password"> <br><br>
+                <button type="Submit" class="btn btn-primary" name="log_in">Log in</button>
               </form>
 
             </div>
           </div>
+
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+
+        
+
           <footer class="container-fluid text-center">
             <p>Developed By <b>tharindu_johnson</b></p>
         </footer>

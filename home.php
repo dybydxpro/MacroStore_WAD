@@ -12,6 +12,10 @@
     </head>
 
     <body onload="currentSlide(1)">
+    <?php 
+            $system_userName;
+            $system_userID;        
+        ?> 
  
         <nav class="navbar navbar-inverse">
             <div class="container-fluid">
@@ -31,6 +35,7 @@
                         <li><a href="about.php"><span class="glyphicon glyphicon-info-sign"></span> About</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                    <li><a href="signup.php"><span class="glyphicon glyphicon-user"></span> User Name</a></li>
                         <li><a href="signup.php"><span class="glyphicon glyphicon-plus-sign"></span> Sign up</a></li>
                         <li><a href="login.php"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                     </ul>

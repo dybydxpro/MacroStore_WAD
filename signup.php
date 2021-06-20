@@ -153,6 +153,8 @@
             }
         ?>
 
+          <br><br><br><br><br><br><br>
+
           <footer class="container-fluid text-center">
             <p>Developed By <b>tharindu_johnson</b></p>
         </footer>
