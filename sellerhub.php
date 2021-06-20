@@ -16,7 +16,7 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID = $_SESSION['uid'];        
+            $system_userID = $_SESSION['uid'];         
         ?> 
 
     <header>

@@ -15,7 +15,7 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID;        
+            $system_userID = $_SESSION['uid'];         
         ?> 
 
 <header>
@@ -37,12 +37,15 @@
           <a class="nav-link" aria-current="page" href="cart.php">Cart</a>
           </li>
           <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="sellerhub.php">Seller hub</a>
+          </li>
+          <li class="nav-item">
           <a class="nav-link" aria-current="page" href="about.php">About</a>
           </li>
         </ul>
         <form class="d-flex">
           <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
+          <li class="nav-item dropdown">
           <a class="nav-link" aria-current="page" href="logout.php"><?php if($system_userName==""){ echo "";} else {echo $system_userName;} ?></a>
           </li>
           <li class="nav-item">

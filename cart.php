@@ -16,7 +16,7 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID;        
+            $system_userID = $_SESSION['uid'];        
         ?> 
 
     <header>
@@ -36,6 +36,9 @@
           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="cart.php">Cart</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="sellerhub.php">Seller hub</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="about.php">About</a>
@@ -59,24 +62,87 @@
   </nav>
 </header>
 
-<br><br>
+<br><br><br><br>
 
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm text-center">
-                    One of three columns
+<div class="container">
+        <div class="row row-cols-4 justify-content-center">
+
+
+        <?php
+          $servername = "localhost:3306";
+          $username = "root";
+          $password = "";
+          $dbname = "wadproject";
+        
+          $conn = mysqli_connect($servername, $username, $password, $dbname);
+          if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+          }
+
+          $sql = "SELECT COUNT(`cartID`) FROM `cartdb` WHERE `userID` =".$system_userID;
+            $result = mysqli_query($conn, $sql);
+            $itemCount = 0;
+
+            if (mysqli_num_rows($result) > 0) {
+              while($row = mysqli_fetch_assoc($result)) {
+                $itemCount = $row["COUNT(`cartID`)"];
+              }
+            } else {
+              echo "0 results";
+            }
+            
+            
+
+          for($x = 0; $x < $itemCount; $x++){
+            $sql = "SELECT `cartID`,`itemNo`,`name`,`image`,`unit`,`unitprice`,`cartqty` FROM `cartdb`,`userdb`,`itemsdb` WHERE `cartdb`.`itemID`= `itemsdb`.`itemNo` AND `cartdb`.`userID`= `userdb`.`userID` AND `userdb`.`userID` = ".$system_userID." LIMIT ".$x.",1";
+            $result = mysqli_query($conn, $sql);
+          
+            if (mysqli_num_rows($result) > 0) {
+            while($row = mysqli_fetch_assoc($result)) {
+              
+              $cartID[$x] = $row["cartID"];
+              $itemNo[$x] = $row["itemNo"];
+              $productName[$x] = $row["name"];
+              $unit[$x] = $row["unit"];
+              $qty[$x] = $row["cartqty"];
+              $price[$x] = $row["unitprice"]; 
+              
+              ?>
+
+              <div class="col">
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" alt="Card image cap"width="200" height="200">
+                <div class="card-body">
+                <h3 class="card-title"><?php echo $row["name"] ?></h3>
+                  <ul>
+                      <li>CartID: <?php echo $row["cartID"] ?></li>
+                      <li>Quantity: <?php echo $row["cartqty"].$row["unit"] ?></li>
+                      <li>Price: LKR. <?php echo $row["unitprice"]*$row["cartqty"] ?></li>
+                    </ul>
+                    <a href="#" class="btn btn-danger">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-recycle" viewBox="0 0 16 16">
+                    <path d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.497l1.703-2.981a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242-2.532-4.431zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.24l2.552-4.467zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.498.498 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244l-1.716-3.004z"/>
+                    </svg> Delete</a>
                 </div>
-                <div class="col-sm">
-                    One of three columns
-                </div>
-                <div class="col-sm">
-                    One of three columns
-                </div>
-            </div>
+              </div>
+              </div>
+              <br>
+              <br>
+              <br>
+
+            <?php }
+            } else {
+              echo "0 results";
+            }
+          }
+          mysqli_close($conn);
+        ?>
+
+        </div>
         </div>
 
-
+        <br><br><br><br><br><br>
         <footer class="bg-dark text-center text-white">
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
   <p>Developed By <b>tharindu_johnson</b></p>

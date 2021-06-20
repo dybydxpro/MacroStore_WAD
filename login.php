@@ -15,8 +15,8 @@
     <br>
     <?php 
             session_start();
-            $system_userName="";
-            $system_userID;        
+            $system_userName = "";
+            $system_userID = "";        
         ?> 
         <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -35,6 +35,9 @@
           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="cart.php">Cart</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="sellerhub.php">Seller hub</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="about.php">About</a>
@@ -76,7 +79,7 @@
 
                         $password;
                         $username = "";
-                        $userID;
+                        $userID = "";
 
 
 
@@ -91,11 +94,9 @@
 
                             if($password==$_POST['password']){
                                 header('Location:home.php');
-                                $system_userName = $username;
-                                $system_userID = $userID;
                                 session_start();
                                 $_SESSION['regName'] = $username;
-                                echo "<a href='home.php'><a>";
+                                $_SESSION['uid'] = $userID; 
                             }
                             else{
                                 echo "<script>alert('Wrong password..!')</script>";

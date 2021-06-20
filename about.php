@@ -16,7 +16,7 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID;        
+            $system_userID = $_SESSION['uid'];        
         ?> 
 
     <header>
@@ -36,6 +36,9 @@
           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="cart.php">Cart</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="sellerhub.php">Seller hub</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="about.php">About</a>

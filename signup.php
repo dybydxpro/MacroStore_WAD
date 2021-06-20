@@ -16,7 +16,7 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID;        
+            $system_userID = $_SESSION['uid'];         
         ?> 
 
     <header>
@@ -36,6 +36,9 @@
           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="cart.php">Cart</a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" aria-current="page" href="sellerhub.php">Seller hub</a>
           </li>
           <li class="nav-item">
           <a class="nav-link" aria-current="page" href="about.php">About</a>
@@ -65,23 +68,23 @@
 <form action="signup.php" method="post">
   <div class="form-group">
     <label for="formGroupExampleInput">Name:</label><br>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="name">
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="name" required>
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">NIC Number:</label><br>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="" name="idno">
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="" name="idno" required>
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput">E-mail:</label><br>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="email">
+    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="email" required>
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput">Password:</label><br>
-    <input type="password" class="form-control" id="formGroupExampleInput" placeholder="" name="password">
+    <input type="password" class="form-control" id="formGroupExampleInput" placeholder="" name="password" required>
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput">Verify Password:</label><br>
-    <input type="password" class="form-control" id="formGroupExampleInput" placeholder="" name="vpassword">
+    <input type="password" class="form-control" id="formGroupExampleInput" placeholder="" name="vpassword" required>
   </div>
   <div class="form-group">
   <button type="Submit" class="btn btn-primary btn-lg" name="sign_up">Submit</button>
