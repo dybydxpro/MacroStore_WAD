@@ -1,5 +1,6 @@
 <?php 
-    session_start();
+          session_start();
+          
 
           $servername = "localhost:3306";
           $username = "root";
@@ -34,4 +35,5 @@
           header('Location:home.php');
       
         ?>
+
 
