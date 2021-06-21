@@ -16,7 +16,7 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID = $_SESSION['uid'];        
+            $system_userID = $_SESSION['uid'];      
         ?> 
 
     <header>
@@ -139,7 +139,13 @@
           mysqli_close($conn);
         ?>
 
+        
+
         </div>
+        </div>
+
+        <div class = "container">
+        <button type="button" class="btn btn-success">Success</button>
         </div>
 
         <br><br><br><br><br><br>
