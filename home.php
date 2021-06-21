@@ -45,7 +45,7 @@
         $sql = "INSERT INTO `cartdb` (`cartID`, `itemID`, `userID`, `cartqty`) VALUES ('".$setCartID."', '".$_SESSION['itemNo']."', '".$system_userID."', '".$_SESSION['cartQty']."');";
 
         if (mysqli_query($conn, $sql)) {
-            echo "New record created successfully";
+
         } else {
             echo "Error: " . $sql . "<br>" . mysqli_error($conn);
         }
@@ -216,7 +216,7 @@
                   </ul>
                   <input type="hidden" name= "product_id" value="<?php echo $row['itemNo'];?>"> 
 
-                  <p>Qty: <input type="text" id="qtyBox" name ="qtyBox" placeholder="" value = "<?php echo $row["qty"]; ?>" required/></p>
+                  <p>Qty: <input type="text" id="qtyBox" name ="qtyBox" placeholder="<?php echo $row["qty"]; ?>" required/></p>
                   <input type="submit" class="btn btn-primary" name = "add" value = "Add to cart">
                   
               </div>

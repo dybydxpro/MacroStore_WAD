@@ -16,7 +16,32 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID = $_SESSION['uid'];      
+            $system_userID = $_SESSION['uid'];
+
+            if(isset($_POST["delete"])){
+              $_SESSION['cartID'] = $_POST['cart_id'];
+            
+          $servername = "localhost:3306";
+          $username = "root";
+          $password = "";
+          $dbname = "wadproject";
+        
+          $conn = mysqli_connect($servername, $username, $password, $dbname);
+          if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+          }
+          
+            $sql = "DELETE FROM `cartdb` WHERE `cartdb`.`cartID` = ".$_SESSION['cartID'].";";
+            $result = mysqli_query($conn, $sql);
+          
+            if (mysqli_query($conn, $sql)) {
+                echo "<script>window.alert('Successfully Deleted row..!')</script>";
+            } else {
+              echo "0 results";
+            }
+
+          mysqli_close($conn);
+          }
         ?> 
 
     <header>
@@ -99,37 +124,34 @@
             $result = mysqli_query($conn, $sql);
           
             if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
-              
-              $cartID[$x] = $row["cartID"];
-              $itemNo[$x] = $row["itemNo"];
-              $productName[$x] = $row["name"];
-              $unit[$x] = $row["unit"];
-              $qty[$x] = $row["cartqty"];
-              $price[$x] = $row["unitprice"]; 
+            while($row = mysqli_fetch_assoc($result)) { 
               
               ?>
 
-              <div class="col">
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" alt="Card image cap"width="200" height="200">
-                <div class="card-body">
-                <h3 class="card-title"><?php echo $row["name"] ?></h3>
-                  <ul>
-                      <li>CartID: <?php echo $row["cartID"] ?></li>
-                      <li>Quantity: <?php echo $row["cartqty"].$row["unit"] ?></li>
-                      <li>Price: LKR. <?php echo $row["unitprice"]*$row["cartqty"] ?></li>
-                    </ul>
-                    <a href="#" class="btn btn-danger">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-recycle" viewBox="0 0 16 16">
-                    <path d="M9.302 1.256a1.5 1.5 0 0 0-2.604 0l-1.704 2.98a.5.5 0 0 0 .869.497l1.703-2.981a.5.5 0 0 1 .868 0l2.54 4.444-1.256-.337a.5.5 0 1 0-.26.966l2.415.647a.5.5 0 0 0 .613-.353l.647-2.415a.5.5 0 1 0-.966-.259l-.333 1.242-2.532-4.431zM2.973 7.773l-1.255.337a.5.5 0 1 1-.26-.966l2.416-.647a.5.5 0 0 1 .612.353l.647 2.415a.5.5 0 0 1-.966.259l-.333-1.242-2.545 4.454a.5.5 0 0 0 .434.748H5a.5.5 0 0 1 0 1H1.723A1.5 1.5 0 0 1 .421 12.24l2.552-4.467zm10.89 1.463a.5.5 0 1 0-.868.496l1.716 3.004a.5.5 0 0 1-.434.748h-5.57l.647-.646a.5.5 0 1 0-.708-.707l-1.5 1.5a.498.498 0 0 0 0 .707l1.5 1.5a.5.5 0 1 0 .708-.707l-.647-.647h5.57a1.5 1.5 0 0 0 1.302-2.244l-1.716-3.004z"/>
-                    </svg> Delete</a>
-                </div>
+              <form method = "post" action = "cart.php?action=delete&id=<?php echo $productID[$x]; ?>">
+            <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row["image"]); ?>" alt="Card image cap"width="200" height="200">
+              <div class="card-body">
+              <h3 class="card-title"><?php echo $row["name"]; ?></h3>
+                <ul>
+                    <li>CartID: <?php echo $row["cartID"]; ?></li>
+                    <li>Quantity: <?php echo $row["cartqty"].$row["unit"]; ?></li>
+                    <li>Price: LKR. <?php echo $row["unitprice"]*$row["cartqty"]; ?></li>
+                  </ul>
+                  <input type="hidden" name= "cart_id" value="<?php echo $row['cartID'];?>"> 
+
+                  <input type="submit" class="btn btn-danger" name = "delete" value = "Delete">
+                  
               </div>
-              </div>
-              <br>
-              <br>
-              <br>
+            </div>  
+            </div>
+            <br>
+            <br>
+            <br>
+            </form>
+
+
 
             <?php }
             } else {
