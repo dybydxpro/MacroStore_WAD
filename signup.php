@@ -168,6 +168,7 @@
                   
 
                   mysqli_close($conn);
+                  header('Location:login.php');
 
                 }
                 else{

@@ -8,10 +8,10 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="style/mainStyle.css">
-        <script type="text/javascript" src="javascript/mainSlideShow.js"></script>
+        <script type="text/javascript" src="javascript/hideButton.js"></script>
     </head>
 
-    <body onload="currentSlide(1)">
+    <body onload="hideButton()">
 
     <?php 
             session_start();
@@ -99,7 +99,8 @@
           $username = "root";
           $password = "";
           $dbname = "wadproject";
-        
+          
+          if($system_userID >= 1){
           $conn = mysqli_connect($servername, $username, $password, $dbname);
           if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
@@ -158,7 +159,13 @@
               echo "0 results";
             }
           }
+        
           mysqli_close($conn);
+        }
+        else{
+          echo "<h1>Please sign in to the site..!</h1>";
+
+        }
         ?>
 
         
@@ -166,8 +173,10 @@
         </div>
         </div>
 
+        <?php if($system_userID <= 0) {echo "<style>#btnSubmit{display:none;}</style>";}?>
+        
         <div class = "container">
-        <button type="button" class="btn btn-success">Success</button>
+        <button type="submit" class="btn btn-success" id="btnSubmit">Success</button>
         </div>
 
         <br><br><br><br><br><br>
