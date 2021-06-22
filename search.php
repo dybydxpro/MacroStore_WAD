@@ -8,17 +8,17 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"></script>
         <link rel="stylesheet" href="style/mainStyle.css">
-        <script type="text/javascript" src="javascript/mainSlideShow.js"></script>
+        <link rel="stylesheet" href="style/search.css">
+        
     </head>
 
     <body>
-
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
             $system_userID = $_SESSION['uid'];      
 
-            if(isset($_POST["add"])){
+            if(isset($_POST['search'])){
               $_SESSION['itemNo'] = $_POST['product_id'];
               $_SESSION['cartQty'] = $_POST['qtyBox'];
 
@@ -32,28 +32,87 @@
             die("Connection failed: " . mysqli_connect_error());
           }
           
-            $sql = "SELECT MAX(`cartID`) FROM `cartdb`";
+            $sql = 'SELECT COUNT(`itemNo`) FROM `itemsdb` WHERE `name` LIKE "%'.$_POST["searchtxt"].'%"';
             $result = mysqli_query($conn, $sql);
           
             if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
-                $setCartID = $row['MAX(`cartID`)']+1;
+            while(mysqli_fetch_assoc($result)) {
+                $noOf_searchResults = $row["COUNT(`itemNo`)"];
             }
             } else {
               echo "0 results";
             }
 
-        $sql = "INSERT INTO `cartdb` (`cartID`, `itemID`, `userID`, `cartqty`) VALUES ('".$setCartID."', '".$_SESSION['itemNo']."', '".$system_userID."', '".$_SESSION['cartQty']."');";
+            for($z = 0; $z < $noOf_searchResults; ++$z){
+            $sql = 'SELECT `itemNo` FROM `itemsdb` WHERE `name` LIKE "%'.$_POST["searchtxt"].'%" LIMIT '.$z.',1';
+            $result = mysqli_query($conn, $sql);
+          
+            if (mysqli_num_rows($result) > 0) {
+            while(mysqli_fetch_assoc($result)) {
+                $searchResults[$z] = $row["itemNo"];
+            }
+            } else {
+              echo "0 results";
+            }
+          }
+          ?>
 
-        if (mysqli_query($conn, $sql)) {
 
-        } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-        }
+        <div class="container">
+        <div class="row row-cols-4 justify-content-center">
+
+
+          <?php
+          for($z = 0; $z < $noOf_searchResults; $z++){
+            $sql = "SELECT `itemNo`, `name`, `image`, `unit`, `qty`, `unitprice` FROM `itemsdb` WHERE `itemNo` = ".$searchResults[$z];
+            $result = mysqli_query($conn, $sql);
+          
+            if (mysqli_num_rows($result) > 0) {
+            while(mysqli_fetch_assoc($result)) {
+                $searchResults[$z] = $row["itemNo"];
+              ?>
+
+
+            <form method = "post" action = "home.php?action=search&id=<?php echo $searchResults[$z]; ?>">
+            <div class="col">
+            <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row["image"]); ?>" alt="Card image cap"width="200" height="200">
+              <div class="card-body">
+              <h3 class="card-title"><?php echo $row["name"]; ?></h3>
+                <ul>
+                    <li>Item No: <?php echo $row["itemNo"] ?></li>
+                    <li>Quantity: <?php echo $row["qty"].$row["unit"]; ?></li>
+                    <li>Price: LKR. <?php echo $row["unitprice"]; ?></li>
+                  </ul>
+                  <input type="hidden" name= "product_id" value="<?php echo $row['itemNo'];?>"> 
+
+                  <p>Qty: <input type="text" id="qtyBox" name ="qtyBox" placeholder="<?php echo $row["qty"]; ?>" required/></p>
+                  <input type="submit" class="btn btn-primary" name = "add" value = "Add to cart">
+                  
+              </div>
+            </div>  
+            </div>
+            <br>
+            <br>
+            <br>
+            </form>
+
+
+              <?php
+            }
+            } else {
+              echo "0 results";
+            }
+          }
+
+          ?>
+        </div>
+        </div>
+        <?php
 
           mysqli_close($conn);
 
-            }
+          }
                
         ?> 
 
@@ -101,150 +160,21 @@
 </header>
  
 
- 
-
-
-            <div class="slideshow-container">
-                <div class="mySlides fade">
-                    <div class="numbertext">1 / 4</div>
-                    <img src="images/slideshow/1.png" style="width:100%">
-                </div>
-                  
-                <div class="mySlides fade">
-                    <div class="numbertext">2 / 4</div>
-                    <img src="images/slideshow/2.png" style="width:100%">
-                </div>
-                  
-                <div class="mySlides fade">
-                    <div class="numbertext">3 / 4</div>
-                    <img src="images/slideshow/3.png" style="width:100%">
-                </div>
-
-                <div class="mySlides fade">
-                    <div class="numbertext">4 / 4</div>
-                    <img src="images/slideshow/4.png" style="width:100%">
-                </div>
-                  
-                <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-                <a class="next" onclick="plusSlides(1)">&#10095;</a>
-                    
-                <div style="text-align:center">
-                    <span class="dot" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                    <span class="dot" onclick="currentSlide(3)"></span>
-                    <span class="dot" onclick="currentSlide(4)"></span>
-                </div>
-            </div>
-        <br><br>
-
-        <?php
-            $servername = "localhost:3306";
-            $username = "root";
-            $password = "";
-            $dbname = "wadproject";
-            
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
-            if (!$conn) {
-              die("Connection failed: " . mysqli_connect_error());
-            }
-            
-            $sql = "SELECT COUNT(`itemNo`) FROM `itemsdb`";
-            $result = mysqli_query($conn, $sql);
-            $itemCount = 0;
-
-            if (mysqli_num_rows($result) > 0) {
-              while($row = mysqli_fetch_assoc($result)) {
-                $itemCount = $row["COUNT(`itemNo`)"];
-              }
-            } else {
-              echo "0 results";
-            }
-            
-            $sql = "SELECT `itemNo` FROM `itemsdb` ";
-            $result = mysqli_query($conn, $sql);
-            $itemNumArray;
-
-            for($i = 0; $i < $itemCount; $i++){
-              $sql = "SELECT `itemNo` FROM `itemsdb` LIMIT ".$i.",1";
-              $result = mysqli_query($conn, $sql);
-              if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                  $itemNumArray[$i] = $row["itemNo"];
-                }
-              }
-              else {
-                echo "0 results";
-              }
-            }
-            mysqli_close($conn);
-        ?>
-
-        <div class="container">
-        <div class="row row-cols-4 justify-content-center">
-
-
-        <?php
-          $servername = "localhost:3306";
-          $username = "root";
-          $password = "";
-          $dbname = "wadproject";
-        
-          $conn = mysqli_connect($servername, $username, $password, $dbname);
-          if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-          }
-          
-          for($x = 0; $x < $itemCount; $x++){
-            $sql = "SELECT `itemNo`, `name`, `image`, `unit`, `qty`, `unitprice` FROM `itemsdb` LIMIT ".$x.",1";
-            $result = mysqli_query($conn, $sql);
-          
-            if (mysqli_num_rows($result) > 0) {
-            while($row = mysqli_fetch_assoc($result)) {
-              $productID[$x] = $row["itemNo"];
-              $productName[$x] = $row["name"];
-              $unit[$x] = $row["unit"];
-              $qty[$x] = $row["qty"];
-              $price[$x] = $row["unitprice"]; ?>
-            
-              <form method = "post" action = "home.php?action=add&id=<?php echo $productID[$x]; ?>">
-            <div class="col">
-            <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row["image"]); ?>" alt="Card image cap"width="200" height="200">
-              <div class="card-body">
-              <h3 class="card-title"><?php echo $row["name"]; ?></h3>
-                <ul>
-                    <li>Item No: <?php echo $row["itemNo"] ?></li>
-                    <li>Quantity: <?php echo $row["qty"].$row["unit"]; ?></li>
-                    <li>Price: LKR. <?php echo $row["unitprice"]; ?></li>
-                  </ul>
-                  <input type="hidden" name= "product_id" value="<?php echo $row['itemNo'];?>"> 
-
-                  <p>Qty: <input type="text" id="qtyBox" name ="qtyBox" placeholder="<?php echo $row["qty"]; ?>" required/></p>
-                  <input type="submit" class="btn btn-primary" name = "add" value = "Add to cart">
-                  
-              </div>
-            </div>  
-            </div>
-            <br>
-            <br>
-            <br>
-            </form>
-
-            <?php
-            }
-            
-            } else {
-              echo "0 results";
-            }
-          }
-          mysqli_close($conn);
-        ?>
-
-
-        </div>
-        </div>
-
-
+<br><br>
+<div class ="container">
+<div class="main">
+  <form><div class="input-group">
+    <input type="text" name = "searchtxt"class="form-control" placeholder="Search">
+    <div class="input-group-append">
+      <button class="btn btn-secondary" type="button" name = "search">
+        <i class="fa fa-search"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg></i>
+      </button>
+    </div>
+    </form></div>
+</div>
+</div> 
 
         <footer class="bg-dark text-center text-white">
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
