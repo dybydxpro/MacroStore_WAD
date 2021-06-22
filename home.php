@@ -15,7 +15,8 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID = $_SESSION['uid'];      
+            $system_userID = $_SESSION['uid'];
+            $system_type = $_SESSION['stype'];      
 
             if(isset($_POST["add"])){
               $_SESSION['itemNo'] = $_POST['product_id'];
@@ -100,7 +101,7 @@
 </header>
  
 
-
+<br><br>
             <div class="slideshow-container">
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>
@@ -240,7 +241,9 @@
 
         </div>
         </div>
-
+            <br>
+            <br><br>
+            <br>  
 
 <footer class="bg-dark text-center text-white">
   <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">

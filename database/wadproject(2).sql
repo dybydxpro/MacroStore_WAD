@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2021 at 09:14 AM
+-- Generation Time: Jun 22, 2021 at 10:17 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -82,6 +82,7 @@ INSERT INTO `itemsdb` (`itemNo`, `name`, `image`, `unit`, `qty`, `unitprice`) VA
 CREATE TABLE `userdb` (
   `userID` int(11) NOT NULL,
   `userName` varchar(50) NOT NULL,
+  `nicNo` varchar(12) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(30) NOT NULL,
   `type` varchar(20) NOT NULL
@@ -91,9 +92,11 @@ CREATE TABLE `userdb` (
 -- Dumping data for table `userdb`
 --
 
-INSERT INTO `userdb` (`userID`, `userName`, `email`, `password`, `type`) VALUES
-(1, 'Tharindu_Johnson', 'systemadmin@macro.lk', 'kdttd1998', 'admin'),
-(2, 'Praveen', 'praveen@macro.lk', 'praveen123', 'user');
+INSERT INTO `userdb` (`userID`, `userName`, `nicNo`, `email`, `password`, `type`) VALUES
+(1, 'Tharindu Johnson', '982603056v', 'systemadmin@macro.lk', 'kdttd1998', 'Admin'),
+(2, 'Praveen', '200120001212', 'praveen@macro.lk', 'praveen123', 'Buyer'),
+(3, 'Roshani Kawisha', '980000000v', 'roshani@macro.lk', 'roshani123', 'Seller'),
+(4, 'Maleesha', '965234567v', 'maleesha@macro.lk', 'maleesha123', 'Seller');
 
 --
 -- Indexes for dumped tables

@@ -16,7 +16,8 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID = $_SESSION['uid'];      
+            $system_userID = $_SESSION['uid'];
+            $system_type = $_SESSION['stype'];
 
             if(isset($_POST['search'])){
               $_SESSION['itemNo'] = $_POST['product_id'];

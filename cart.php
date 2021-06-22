@@ -17,6 +17,7 @@
             session_start();
             $system_userName= $_SESSION['regName'];
             $system_userID = $_SESSION['uid'];
+            $system_type = $_SESSION['stype'];
 
             if(isset($_POST["delete"])){
               $_SESSION['cartID'] = $_POST['cart_id'];

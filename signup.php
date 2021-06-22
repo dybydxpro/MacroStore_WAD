@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Login</title>
+        <title>Sign up</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
@@ -16,7 +16,8 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID = $_SESSION['uid'];         
+            $system_userID = $_SESSION['uid'];
+            $system_type = $_SESSION['stype'];
         ?> 
 
     <header>
@@ -72,7 +73,7 @@
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput2">NIC Number:</label><br>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="" name="idno" required>
+    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="" name="nicNo" required>
   </div>
   <div class="form-group">
     <label for="formGroupExampleInput">E-mail:</label><br>
@@ -87,6 +88,16 @@
     <input type="password" class="form-control" id="formGroupExampleInput" placeholder="" name="vpassword" required>
   </div>
   <div class="form-group">
+    <label for="formGroupExampleInput">Account type:</label><br>
+    <div class="input-group">
+    <select class="form-select" id="formGroupExampleInput" name="accountType" aria-label="Example select with button addon" required>
+      <option value="Buyer">Buyer</option>
+      <option value="Seller">Seller</option>
+    </select>
+  </div>
+  </div>
+  <div class="form-group">
+  <br>
   <button type="Submit" class="btn btn-primary btn-lg" name="sign_up">Submit</button>
   </div>
 </form>
@@ -94,13 +105,13 @@
 
 <?php
             if(isset($_POST['sign_up'])) {
-              if(!empty($_POST['name'])&&!empty($_POST['idno'])&&!empty($_POST['email'])&&!empty($_POST['password'])&&!empty($_POST['vpassword'])){
-                $id=0;
+              if(!empty($_POST['name']) && !empty($_POST['nicNo']) && !empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['vpassword'])){
                 $name = $_POST['name'];
-                $idNo = $_POST['idno'];
+                $nicNo = $_POST['nicNo'];
                 $email = $_POST['email'];
                 $password = $_POST['password'];
                 $vpassword = $_POST['vpassword'];
+                $accountType = $_POST['accountType'];
 
                 if($password==$vpassword){
                   $servername = "localhost:3306";
@@ -158,17 +169,16 @@
                   }
 
 
-                    $sql = "INSERT INTO `userdb` (`userID`, `userName`, `email`, `password`, `type`) VALUES ('".$id."', '".$name."', '".$email."', '".$vpassword."', 'user');";
+                    $sql = "INSERT INTO `userdb` (`userID`,`userName`,`nicNo`, `email`, `password`, `type`) VALUES ('".$id."', '".$name."', '".$nicNo."', '".$email."', '".$vpassword."', '".$accountType."');";
                     if (mysqli_query($conn, $sql)) {
-                      echo '<script>alert("New record created successfully")</script>';
+                      echo '<script>window.alert("New record created successfully")</script>';
                     } else {
                       $txt ="Error: " . $sql . "<br>" . mysqli_error($conn);
-                      echo '<script>alert("<?php echo $txt ?>")</script>';
+                      echo '<script>window.alert("<?php echo $txt ?>")</script>';
                     }
                   
 
                   mysqli_close($conn);
-                  header('Location:login.php');
 
                 }
                 else{

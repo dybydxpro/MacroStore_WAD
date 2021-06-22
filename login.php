@@ -16,7 +16,8 @@
     <?php 
             session_start();
             $system_userName = "";
-            $system_userID = "";       
+            $system_userID = "";
+            $system_type = "";       
         ?> 
         <header>
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -74,7 +75,7 @@
                           die("Connection failed: " . mysqli_connect_error());
                         }
                         
-                        $sql = "SELECT `userID`,`userName`,`password` FROM `userdb` WHERE `email` = '". $_POST['email']."'";
+                        $sql = "SELECT `userID`,`userName`,`password`,`type` FROM `userdb` WHERE `email` = '". $_POST['email']."'";
                         $result = mysqli_query($conn, $sql);
 
                         $password;
@@ -90,13 +91,15 @@
                                 $password = $row["password"];
                                 $username = $row["userName"];
                                 $userID = $row["userID"];
+                                $stype = $row["type"];
                             }
 
                             if($password==$_POST['password']){
                                 header('Location:home.php');
                                 session_start();
                                 $_SESSION['regName'] = $username;
-                                $_SESSION['uid'] = $userID; 
+                                $_SESSION['uid'] = $userID;
+                                $_SESSION['stype'] = $stype;
                             }
                             else{
                                 echo "<script>alert('Wrong password..!')</script>";

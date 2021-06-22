@@ -16,7 +16,8 @@
     <?php 
             session_start();
             $system_userName= $_SESSION['regName'];
-            $system_userID = $_SESSION['uid'];        
+            $system_userID = $_SESSION['uid']; 
+            $system_type = $_SESSION['stype'];       
         ?> 
 
     <header>
@@ -62,7 +63,7 @@
   </nav>
 </header>
 
-<br><br><br><br><br><br>
+<br><br><br><br><br>
 
 <div class="page-content page-container" id="page-content">
     <div class="padding">
@@ -117,7 +118,7 @@
 </div>
 
 
-<br><br><br><br>
+<br><br><br>
 
 
 
