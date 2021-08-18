@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="style/header.css">
         <link rel="stylesheet" href="style/objects.css">
         <link rel="stylesheet" href="style/slideshow.css">
+        <link rel="stylesheet" href="style/about.css">
         <script type="text/javascript" src="javascript/mainSlideShow.js"></script>
     </head>
 
@@ -26,7 +27,7 @@
         <td width="550"> </td>
         <td width="500">
             <ul class="nos">
-                <li class="li_left"><a class="ad">Macro Super Center</a></li>
+                <li class="li_left"><b class="ad">Macro Super Center</b></li>
                 <li class="li_left"><a class="ad" href="home.php"> Home</a></li>
                 <li class="li_left"><a class="ad" href="search.php">Search</a></li>
                 <li class="li_left"><a class="ad" href="cart.php">Cart</a></li>
@@ -42,9 +43,9 @@
   </div>
 </header>
 
-<br><br><br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
-<div class="page-content page-container" id="page-content">
+<!--<div class="page-content page-container" id="page-content">
     <div class="padding">
         <div class="row container d-flex justify-content-center">
             <div class="col-xl-6 col-md-12">
@@ -59,7 +60,7 @@
                         </div>
                         <div class="col-sm-8">
                             <div class="card-block">
-                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Informationa</h6>
+                                <h6 class="m-b-20 p-b-5 b-b-default f-w-600">Information</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <p class="m-b-10 f-w-600">Email</p>
@@ -94,10 +95,54 @@
             </div>
         </div>
     </div>
+</div>-->
+
+<div class="wrapper">
+    <div class="left">
+        <img src="images/dp.jpg" alt="user" width="170">
+        <h4 class="name">IT20750206</h4>
+         <p>Software Developer</p>
+    </div>
+    <div class="right">
+        <div class="info">
+            <h3>Tharindu T. Dayananda</h3>
+            <div class="info_data">
+                 <div class="data">
+                    <h4>Email</h4>
+                    <p>tharindutd1998@gmail.com</p>
+                 </div>
+                 <div class="data">
+                   <h4>Phone</h4>
+                    <p>+94 77 92 00 039</p>
+              </div>
+            </div>
+        </div>
+      
+      <div class="projects">
+            <h3>Projects</h3>
+            <div class="projects_data">
+                 <div class="data">
+                    <h4>Subject</h4>
+                    <p>Web Application Development</p>
+                 </div>
+                 <div class="data">
+                   <h4>Lecture In-charge</h4>
+                    <p>Dr. Gayana Fernando</p>
+              </div>
+            </div>
+        </div>
+      
+        <div class="social_media">
+            <ul>
+              <li><a href="#"><img src="images/icon/facebook.png" alt="user" width="50"></a></li>
+              <li><a href="#"><img src="images/icon/instagram.png" alt="user" width="50"></a></li>
+              <li><a href="#"><img src="images/icon/github.png" alt="user" width="50"></a></li>
+          </ul>
+      </div>
+    </div>
 </div>
 
-
-<br><br><br>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 
 
 

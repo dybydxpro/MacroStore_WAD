@@ -14,13 +14,21 @@
     </head>
 
     <body>
+
+    <?php 
+            session_start();
+            $system_userName= $_SESSION['regName'];
+            $system_userID = $_SESSION['uid'];  
+            $system_type = $_SESSION['stype'];       
+        ?> 
+
     <header>
   <div class="box_level_free">
     <tr>
     <td width="550"> </td>
         <td width="500">
             <ul class="nos">
-                <li class="li_left"><a class="ad">Macro Super Center</a></li>
+                <li class="li_left"><b class="ad">Macro Super Center</b></li>
                 <li class="li_left"><a class="ad" href="home.php"> Home</a></li>
                 <li class="li_left"><a class="ad" href="search.php">Search</a></li>
                 <li class="li_left"><a class="ad" href="cart.php">Cart</a></li>
@@ -36,10 +44,6 @@
   </div>
 </header>
     <?php 
-            session_start();
-            $system_userName= $_SESSION['regName'];
-            $system_userID = $_SESSION['uid'];
-            $system_type = $_SESSION['stype'];
 
             if(isset($_POST['search'])){
               $_SESSION['itemNo'] = $_POST['product_id'];

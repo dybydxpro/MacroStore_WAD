@@ -14,6 +14,13 @@
     <body onload="currentSlide(1)">
     <?php 
             session_start();
+
+            if(empty($_SESSION['regName'])||empty($_SESSION['uid'])||empty($_SESSION['stype'])){
+              $_SESSION['regName'] = "";
+              $_SESSION['uid'] = "";
+              $_SESSION['stype'] = "";
+            }
+
             $system_userName= $_SESSION['regName'];
             $system_userID = $_SESSION['uid'];
             $system_type = $_SESSION['stype'];      
@@ -63,7 +70,7 @@
         <td width="429"> </td>
         <td width="471">
             <ul class="nos">
-                <li class="li_left"><a class="ad">Macro Super Center</a></li>
+                <li class="li_left"><b class="ad">Macro Super Center</b></li>
                 <li class="li_left"><a class="ad" href="home.php"> Home</a></li>
                 <li class="li_left"><a class="ad" href="search.php">Search</a></li>
                 <li class="li_left"><a class="ad" href="cart.php">Cart</a></li>
@@ -78,7 +85,7 @@
     </tr>
   </div>
 </header>
- 
+            
             <div class="slideshow-container">
                 <div class="mySlides fade">
                     <div class="numbertext">1 / 4</div>

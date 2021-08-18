@@ -27,7 +27,7 @@
     <td width="550"> </td>
         <td width="500">
             <ul class="nos">
-                <li class="li_left"><a class="ad">Macro Super Center</a></li>
+                <li class="li_left"><b class="ad">Macro Super Center</b></li>
                 <li class="li_left"><a class="ad" href="home.php"> Home</a></li>
                 <li class="li_left"><a class="ad" href="search.php">Search</a></li>
                 <li class="li_left"><a class="ad" href="cart.php">Cart</a></li>
@@ -45,7 +45,7 @@
 
 <br><br><br><br><br>
 
-<div class="container">
+<div class="box_level_xs">
 <form action="signup.php" method="post">
   <div class="form-group">
     <label for="formGroupExampleInput">Name:</label><br>

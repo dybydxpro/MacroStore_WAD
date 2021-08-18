@@ -4,51 +4,40 @@
         <title>Macro Super Center</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css"></script>
+        <link rel="stylesheet" href="../style/shub_header.css">
+        <link rel="stylesheet" href="../style/shub_objects.css">
+        <link rel="stylesheet" href="../style/table.css">
     </head>
 
     <body>
-<br><br>
-        <header>
-  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-primary">
-    <div class="container-fluid">
-      <a class="navbar-brand">Macro Seller Hub</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
-        <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="sh_InsertNewItem.php">Insert New Item</a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="sh_UpdatePrice.php">Update Price</a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="sh_AddNewStock.php">Add New Stock</a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="sh_RemoveStock.php">Remove Stock</a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="sh_DeleteItem.php">Delete Items</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <ul class="navbar-nav me-auto mb-2 mb-md-0">
-          <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/../WAD Final ProX/sellerhub.php">Seller hub</a>
-          </li>
-          <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="/../WAD Final ProX/home.php">Home</a>
-          </li>
-          </ul>
-        </form>
-      </div>
-    </div>
-  </nav>
+    <?php 
+            session_start();
+            $system_userName= $_SESSION['regName'];
+            $system_userID = $_SESSION['uid'];  
+            $system_type = $_SESSION['stype'];       
+        ?> 
+
+<header>
+  <div class="box_level_free">
+    <tr>
+        <td width="550"> </td>
+        <td width="500">
+            <ul class="nos">
+                <li class="li_left"><b class="ad">Macro Super Center</b></li>
+                <li class="li_left"><a class="ad" href="sh_InsertNewItem.php">Insert New Item</a></li>
+                <li class="li_left"><a class="ad" href="sh_UpdatePrice.php">Update Price</a></li>
+                <li class="li_left"><a class="ad" href="sh_AddNewStock.php">Add New Stock</a></li>
+                <li class="li_left"><a class="ad" href="sh_RemoveStock.php">Remove Stock</a></li>
+                <li class="li_left"><a class="ad" href="sh_DeleteItem.php">Delete Items</a></li>
+                
+                <li class="li_right"><a class="ad" href="/../MacroStore_WAD/sellerhub.php">Seller Hub</a></li>
+                <li class="li_right"><a class="ad" href="/../MacroStore_WAD/home.php">Home</a></li>
+                <li class="li_right"><b class="ad"><i><?php if($system_userName==""){ echo "";} else {echo $system_userName;} ?><i></b></li>
+            </ul>
+        </td>
+    </tr>
+  </div>
 </header>
 
 <?php
@@ -92,12 +81,12 @@
             }
             mysqli_close($conn);
         ?>
-
-	<div class="container">
+<br><br>
+	<div class="box_level">
     <form>
-		<table class="table text-center">
+		<table id="customers">
 			<thead>
-				<tr>
+				<tr class="green_field">
 					<th><b>Item ID</b></th>
 					<th><b>Name</b></th>
 					<th><b>Qty</b></th>
@@ -153,8 +142,8 @@
 
   <br><br>
 <br><br>
-        <footer class="bg-dark text-center text-white">
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+<footer>
+  <div class="box_level_xl" style="background-color: rgba(0, 0, 0, 0.2); text-align: center; font-family: Arial, Helvetica, sans-serif; height:50px; padding:1px;">
   <p>Developed By <b>tharindu_johnson</b></p>
   </div>
 </footer>
