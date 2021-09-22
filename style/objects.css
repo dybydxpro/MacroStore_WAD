@@ -8,7 +8,7 @@ body {
 
 /*  Text boxes  */
 
-input[type=text] {
+input[type=text],select, option {
     border: none;
     font-size: larger;
     border-bottom: 2px solid rgb(0, 0, 0);
@@ -20,6 +20,11 @@ input[type=password] {
     font-size: larger;
     border-bottom: 2px solid rgb(0, 0, 0);
     background: transparent;
+}
+
+label{
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 /*  Buttons  */

@@ -42,15 +42,101 @@
 </header>
 
 <?php
-            $servername = "localhost:3306";
-            $username = "root";
-            $password = "";
-            $dbname = "wadproject";
+  $servername = "localhost:3306";
+  $username = "root";
+  $password = "";
+  $dbname = "wadproject";
             
-            $conn = mysqli_connect($servername, $username, $password, $dbname);
-            if (!$conn) {
-              die("Connection failed: " . mysqli_connect_error());
-            }
+  $conn = mysqli_connect($servername, $username, $password, $dbname);
+  if (!$conn) {
+    die("Connection failed: " . mysqli_connect_error());
+  }
+
+  $sql = "SELECT MAX(`itemNo`) FROM `itemsdb`";
+  $result = mysqli_query($conn, $sql);
+
+  if (mysqli_num_rows($result) > 0) {
+  while($row = mysqli_fetch_assoc($result)) {
+      $setCartID = $row['MAX(`itemNo`)']+1;
+  }
+  } else {
+    echo "0 results";
+  }
+
+  if(isset($_POST["txtUnitPrice"])){
+
+    $uID = $setCartID;
+    $name = $_POST["txtName"];
+    $imagePath = $_POST['txtImage'];
+    $unit = $_POST['txtUnit'];
+    $unitprice = $_POST['txtUnitPrice'];
+      if($uID && $name && $imagePath && $unit && $unitprice){
+        echo "<script> alert('Fill all fields!')</script>";
+        /*$sql = "INSERT INTO `itemsdb` (`itemNo`, `name`, `image`, `unit`, `qty`, `unitprice`) VALUES ('".$setCartID."', '".$_POST['txtName']."', LOAD_FILE('".$_POST['txtImage']."'), '".$_POST['txtUnit']."', '0', '".$_POST['txtUnitPrice']."');";
+        $result = mysqli_query($conn, $sql);
+        if (mysqli_num_rows($result) > 0) {
+          echo "<script> alert('Insert Successfully!')</script>";
+        } 
+        else {
+          echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+        }*/
+      }
+      else {
+        echo "<script> alert('Fill all fields!')</script>";
+      }
+  }
+
+?>
+
+<div class="box_level_xs aligncontentcenter">
+  <form method="post" class="edittable">
+    <table class="aligncontentcenter">
+      <tr>
+        <td colspan="2"><h1 style="text-align: center;"><i>Insert New Item</i></h1></td>
+      </tr>
+      <tr>
+        <td><h4>Item ID:</h4></td>
+        <td><input type="text" id="txtID" name="txtID" value="<?php echo $setCartID; ?>" disabled></td>
+      </tr>
+      <tr>
+        <td><h4>Name:</h4></td>
+        <td><input type="text" id="txtName" name="txtName"></td>
+      </tr>
+      <tr>
+        <td><h4>Unit:</h4></td>
+        <td><input type="text" id="txtUnit" name="txtUnit"></td>
+      </tr>
+      <tr>
+        <td><h4>Unit Price:</h4></td>
+        <td><input type="text" id="txtUnitPrice" name="txtUnitPrice"></td>
+      </tr>
+      <tr>
+        <td><h4>Photo:</h4></td>
+        <td><input type="file" id="txtImage" name="txtImage"></td>
+      </tr>
+      <tr>
+        <td></td>
+        <td><input type="submit" class="btn_sl_green" id="txtUnitPrice" name="txtUnitPrice" value="Insert"></td>
+      </tr>
+    </table>
+  </form>
+</div>
+
+<?php
+
+
+
+    /*$sql = "SELECT COUNT(`itemNo`) FROM `itemsdb`";
+    $result = mysqli_query($conn, $sql);
+    $itemCount = 0;
+    
+    if (mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)) {
+        $itemCount = $row["COUNT(`itemNo`)"];
+      }
+    } else {
+      echo "0 results";
+    }*/
             
             $sql = "SELECT COUNT(`itemNo`) FROM `itemsdb`";
             $result = mysqli_query($conn, $sql);

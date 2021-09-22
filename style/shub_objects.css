@@ -13,6 +13,7 @@ input[type=text] {
     font-size: larger;
     border-bottom: 2px solid rgb(0, 0, 0);
     background: transparent;
+    width: 100%;
 }
 
 input[type=password] {
@@ -20,6 +21,24 @@ input[type=password] {
     font-size: larger;
     border-bottom: 2px solid rgb(0, 0, 0);
     background: transparent;
+    width: 100%;
+}
+
+input[type=file] {
+    border: none;
+    font-size: larger;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    background: transparent;
+    width: 100%;
+}
+
+input:focus {
+    border: none;
+    font-size: larger;
+    border-bottom: 2px solid rgb(0, 0, 0);
+    background: transparent;
+    width: 100%;
+    outline: none;
 }
 
 /*  Buttons  */
@@ -174,4 +193,14 @@ input[type=password] {
     width: 33.3%;
     align-content: center;
     text-align: center;
+  }
+
+
+  .edittable{
+      width: 90%;
+      align-content: center;
+  }
+
+  .aligncontentcenter{
+      align-content: center;
   }

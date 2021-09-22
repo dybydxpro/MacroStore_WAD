@@ -12,7 +12,6 @@
     </head>
 
     <body>
-    <br>
     <?php 
             session_start();
             $system_userName = "";
@@ -98,18 +97,19 @@
 
         <br><br><br><br><br><br><br><br><br>
 
-        <div class="container">
+        <div class="box_level_xs">
             <div id="form-group">
 
               <form action="login.php" method="post">
-                <div class="form-group">
-                <input type="text" class="form-control" id="email" name="email" placeholder = "email" required>
+                <div>
+                <br><br>
+                <input type="text" id="email" name="email" placeholder = "email" required><br><br>
                 </div>
-                <div class="form-group">
-                <input type="password" class="form-control" id="password" name="password" placeholder = "password" required> <br><br>
+                <div>
+                <input type="password" id="password" name="password" placeholder = "password" required> <br><br>
                 </div>
-                <div class="form-group">
-                <button type="Submit" class="btn btn-primary btn-lg" name="log_in">Log in</button>
+                <div>
+                <button type="Submit" class="btn_sl_blue" name="log_in">Log in</button>
                 </div>
               </form>
             </div>

@@ -64,27 +64,27 @@
                
         ?> 
 
-<header>
-<div class="box_level_free">
-    <tr>
-        <td width="429"> </td>
-        <td width="471">
-            <ul class="nos">
-                <li class="li_left"><b class="ad">Macro Super Center</b></li>
-                <li class="li_left"><a class="ad" href="home.php"> Home</a></li>
-                <li class="li_left"><a class="ad" href="search.php">Search</a></li>
-                <li class="li_left"><a class="ad" href="cart.php">Cart</a></li>
-                <li class="li_left"><a class="ad" href="sellerhub.php">Seller hub</a></li>
-                <li class="li_left"><a class="ad" href="about.php">About Us</a></li>
-                
-                <li class="li_right"><a class="ad" href="login.php">Log in</a></li>
-                <li class="li_right"><a class="ad" href="signup.php">Sign up</a></li>
-                <li class="li_right"><a class="ad" href="logout.php"><?php if($system_userName==""){ echo "";} else {echo $system_userName;} ?></a></li>
-            </ul>
-        </td>
-    </tr>
-  </div>
-</header>
+          <header>
+          <div class="box_level_free">
+              <tr>
+                  <td width="429"> </td>
+                  <td width="471">
+                      <ul class="nos">
+                          <li class="li_left"><b class="ad">Macro Super Center</b></li>
+                          <li class="li_left"><a class="ad" href="home.php"> Home</a></li>
+                          <li class="li_left"><a class="ad" href="search.php">Search</a></li>
+                          <li class="li_left"><a class="ad" href="cart.php">Cart</a></li>
+                          <li class="li_left"><a class="ad" href="sellerhub.php">Seller hub</a></li>
+                          <li class="li_left"><a class="ad" href="about.php">About Us</a></li>
+                          
+                          <li class="li_right"><a class="ad" href="login.php">Log in</a></li>
+                          <li class="li_right"><a class="ad" href="signup.php">Sign up</a></li>
+                          <li class="li_right"><a class="ad" href="logout.php"><?php if($system_userName==""){ echo "";} else {echo $system_userName;} ?></a></li>
+                      </ul>
+                  </td>
+              </tr>
+            </div>
+          </header>
             
             <div class="slideshow-container">
                 <div class="mySlides fade">

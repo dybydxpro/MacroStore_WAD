@@ -47,38 +47,38 @@
 
 <div class="box_level_xs">
 <form action="signup.php" method="post">
-  <div class="form-group">
-    <label for="formGroupExampleInput">Name:</label><br>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="name" required>
+  <div>
+    <label for="">Name:</label><br>
+    <input type="text" id="" placeholder="" name="name" required>
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput2">NIC Number:</label><br>
-    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="" name="nicNo" required>
+  <div>
+    <label for="">NIC Number:</label><br>
+    <input type="text" id="" placeholder="" name="nicNo" required>
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput">E-mail:</label><br>
-    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="" name="email" required>
+  <div>
+    <label for="">E-mail:</label><br>
+    <input type="text" id="" placeholder="" name="email" required>
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput">Password:</label><br>
-    <input type="password" class="form-control" id="formGroupExampleInput" placeholder="" name="password" required>
+  <div>
+    <label for="">Password:</label><br>
+    <input type="password" id="" placeholder="" name="password" required>
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput">Verify Password:</label><br>
-    <input type="password" class="form-control" id="formGroupExampleInput" placeholder="" name="vpassword" required>
+  <div>
+    <label for="">Verify Password:</label><br>
+    <input type="password" id="" placeholder="" name="vpassword" required>
   </div>
-  <div class="form-group">
-    <label for="formGroupExampleInput">Account type:</label><br>
-    <div class="input-group">
-    <select class="form-select" id="formGroupExampleInput" name="accountType" aria-label="Example select with button addon" required>
+  <div>
+    <label for="">Account type:</label><br>
+    <div>
+    <select id="" name="accountType" aria-label="Example select with button addon" required>
       <option value="Buyer">Buyer</option>
       <option value="Seller">Seller</option>
     </select>
   </div>
   </div>
-  <div class="form-group">
+  <div>
   <br>
-  <button type="Submit" class="btn btn-primary btn-lg" name="sign_up">Submit</button>
+  <button type="Submit" class="btn_sl_blue" name="sign_up">Submit</button>
   </div>
 </form>
 </div>
